@@ -1,7 +1,7 @@
-
 import discord
 from discord.ext import commands
 import os
+import sys
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -14,4 +14,10 @@ async def on_ready():
 async def привет(ctx):
     await ctx.send("Привет! Я всегда онлайн на Railway!")
 
-bot.run(os.environ["DISCORD_TOKEN"])
+# Безопасное получение токена
+token = os.getenv("DISCORD_TOKEN")
+if not token:
+    print("❌ Переменная окружения DISCORD_TOKEN не найдена. Завершаем.")
+    sys.exit(1)
+
+bot.run(token)

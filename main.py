@@ -4,6 +4,8 @@ import os
 import sys
 
 intents = discord.Intents.default()
+intents.message_content = True  # ОБЯЗАТЕЛЬНО!
+
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
@@ -14,7 +16,6 @@ async def on_ready():
 async def привет(ctx):
     await ctx.send("Привет! Я всегда онлайн на Railway!")
 
-# Безопасное получение токена
 token = os.getenv("DISCORD_TOKEN")
 if not token:
     print("❌ Переменная окружения DISCORD_TOKEN не найдена. Завершаем.")
